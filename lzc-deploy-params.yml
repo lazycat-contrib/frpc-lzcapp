@@ -42,7 +42,7 @@ params:
   - id: local_ip
     type: string
     name: Local Service Address
-    description: "Address of the service reachable from frpc, such as 127.0.0.1 or a LAN IP."
+    description: "Host-network address of the service, such as 127.0.0.1 or a LAN IP."
     default_value: "127.0.0.1"
     optional: false
 
@@ -82,7 +82,7 @@ locales:
       description: "初始 TCP 代理的名称。"
     local_ip:
       name: "本地服务地址"
-      description: "frpc 可访问的服务地址，例如 127.0.0.1 或局域网 IP。"
+      description: "宿主网络中的服务地址，例如 127.0.0.1 或局域网 IP。"
     local_port:
       name: "本地服务端口"
       description: "需要暴露的本地 TCP 服务端口。"
@@ -110,7 +110,7 @@ locales:
       description: "Name of the initial TCP proxy."
     local_ip:
       name: Local Service Address
-      description: "Address of the service reachable from frpc."
+      description: "Host-network address of the service reachable from frpc."
     local_port:
       name: Local Service Port
       description: "TCP port of the local service to expose."

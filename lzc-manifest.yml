@@ -3,7 +3,7 @@ application:
   background_task: true
   upstreams:
     - location: /
-      backend: http://frpc:7400/
+      backend: http://host.lzcapp:7400/
   injects:
     - id: inject-frpc-basic-auth
       on: request
@@ -20,6 +20,7 @@ services:
   frpc:
     # upstream: ghcr.io/fatedier/frpc:v0.70.1
     image: ghcr.1ms.run/fatedier/frpc:v0.70.1
+    network_mode: host
     environment:
       - "FRPC_SERVER_ADDR={{ .U.frpc_server_addr }}"
       - "FRPC_SERVER_PORT={{ .U.frpc_server_port }}"
