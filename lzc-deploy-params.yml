@@ -1,0 +1,119 @@
+params:
+  - id: frpc_server_addr
+    type: string
+    name: FRP Server Address
+    description: "Hostname or IP address of the frps server."
+    optional: false
+
+  - id: frpc_server_port
+    type: string
+    name: FRP Server Port
+    description: "Control port exposed by the frps server."
+    default_value: "7000"
+    optional: false
+
+  - id: frpc_auth_token
+    type: secret
+    name: FRP Auth Token
+    description: "Shared token used by this frpc client and the target frps server."
+    optional: false
+
+  - id: frpc_webserver_user
+    type: string
+    name: Web UI Username
+    description: "Username for the embedded frpc Web UI."
+    default_value: "admin"
+    optional: false
+
+  - id: frpc_webserver_password
+    type: secret
+    name: Web UI Password
+    description: "Password for the embedded frpc Web UI."
+    default_value: "$random(len=24)"
+    optional: false
+
+  - id: proxy_name
+    type: string
+    name: Initial Proxy Name
+    description: "Name of the initial TCP proxy."
+    default_value: "demo"
+    optional: false
+
+  - id: local_ip
+    type: string
+    name: Local Service Address
+    description: "Address of the service reachable from frpc, such as 127.0.0.1 or a LAN IP."
+    default_value: "127.0.0.1"
+    optional: false
+
+  - id: local_port
+    type: string
+    name: Local Service Port
+    description: "TCP port of the local service to expose."
+    default_value: "80"
+    optional: false
+
+  - id: remote_port
+    type: string
+    name: Remote Proxy Port
+    description: "TCP port allowed and published by frps. The companion package defaults to 6000."
+    default_value: "6000"
+    optional: false
+
+locales:
+  zh:
+    frpc_server_addr:
+      name: "FRP 服务端地址"
+      description: "已部署 frps 的域名或 IP 地址。"
+    frpc_server_port:
+      name: "FRP 服务端端口"
+      description: "frps 暴露的控制连接端口。"
+    frpc_auth_token:
+      name: "FRP 鉴权令牌"
+      description: "此 frpc 与目标 frps 共同使用的鉴权令牌。"
+    frpc_webserver_user:
+      name: "Web UI 用户名"
+      description: "frpc 内置 Web 管理界面的用户名。"
+    frpc_webserver_password:
+      name: "Web UI 密码"
+      description: "frpc 内置 Web 管理界面的密码。"
+    proxy_name:
+      name: "初始代理名称"
+      description: "初始 TCP 代理的名称。"
+    local_ip:
+      name: "本地服务地址"
+      description: "frpc 可访问的服务地址，例如 127.0.0.1 或局域网 IP。"
+    local_port:
+      name: "本地服务端口"
+      description: "需要暴露的本地 TCP 服务端口。"
+    remote_port:
+      name: "远端代理端口"
+      description: "frps 允许并对外发布的 TCP 端口；配套包默认为 6000。"
+  en:
+    frpc_server_addr:
+      name: FRP Server Address
+      description: "Hostname or IP address of the frps server."
+    frpc_server_port:
+      name: FRP Server Port
+      description: "Control port exposed by the frps server."
+    frpc_auth_token:
+      name: FRP Auth Token
+      description: "Shared token used by this frpc client and the target frps server."
+    frpc_webserver_user:
+      name: Web UI Username
+      description: "Username for the embedded frpc Web UI."
+    frpc_webserver_password:
+      name: Web UI Password
+      description: "Password for the embedded frpc Web UI."
+    proxy_name:
+      name: Initial Proxy Name
+      description: "Name of the initial TCP proxy."
+    local_ip:
+      name: Local Service Address
+      description: "Address of the service reachable from frpc."
+    local_port:
+      name: Local Service Port
+      description: "TCP port of the local service to expose."
+    remote_port:
+      name: Remote Proxy Port
+      description: "TCP port allowed and published by frps."

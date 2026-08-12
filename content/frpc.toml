@@ -1,0 +1,24 @@
+serverAddr = "{{ .Envs.FRPC_SERVER_ADDR }}"
+serverPort = {{ .Envs.FRPC_SERVER_PORT }}
+
+auth.method = "token"
+auth.token = "{{ .Envs.FRPC_AUTH_TOKEN }}"
+
+loginFailExit = false
+
+webServer.addr = "{{ .Envs.FRPC_WEBSERVER_ADDR }}"
+webServer.port = {{ .Envs.FRPC_WEBSERVER_PORT }}
+webServer.user = "{{ .Envs.FRPC_WEBSERVER_USER }}"
+webServer.password = "{{ .Envs.FRPC_WEBSERVER_PASSWORD }}"
+
+log.to = "console"
+
+[store]
+path = "/var/lib/frp/store.json"
+
+[[proxies]]
+name = "{{ .Envs.FRPC_PROXY_NAME }}"
+type = "tcp"
+localIP = "{{ .Envs.FRPC_LOCAL_IP }}"
+localPort = {{ .Envs.FRPC_LOCAL_PORT }}
+remotePort = {{ .Envs.FRPC_REMOTE_PORT }}

@@ -1,0 +1,44 @@
+application:
+  subdomain: frpc
+  background_task: true
+  upstreams:
+    - location: /
+      backend: http://frpc:7400/
+  injects:
+    - id: inject-frpc-basic-auth
+      on: request
+      auth_required: false
+      when:
+        - /*
+      do: |
+        ctx.headers.set(
+          "Authorization",
+          "Basic " + ctx.base64.encode("{{ .U.frpc_webserver_user }}:{{ .U.frpc_webserver_password }}")
+        );
+
+services:
+  frpc:
+    # upstream: ghcr.io/fatedier/frpc:v0.70.1
+    image: ghcr.1ms.run/fatedier/frpc:v0.70.1
+    environment:
+      - "FRPC_SERVER_ADDR={{ .U.frpc_server_addr }}"
+      - "FRPC_SERVER_PORT={{ .U.frpc_server_port }}"
+      - "FRPC_AUTH_TOKEN={{ .U.frpc_auth_token }}"
+      - FRPC_WEBSERVER_ADDR=0.0.0.0
+      - FRPC_WEBSERVER_PORT=7400
+      - "FRPC_WEBSERVER_USER={{ .U.frpc_webserver_user }}"
+      - "FRPC_WEBSERVER_PASSWORD={{ .U.frpc_webserver_password }}"
+      - "FRPC_PROXY_NAME={{ .U.proxy_name }}"
+      - "FRPC_LOCAL_IP={{ .U.local_ip }}"
+      - "FRPC_LOCAL_PORT={{ .U.local_port }}"
+      - "FRPC_REMOTE_PORT={{ .U.remote_port }}"
+    binds:
+      - /lzcapp/var/frpc:/var/lib/frp
+    setup_script: |
+      mkdir -p /etc/frp
+      cp /lzcapp/pkg/content/frpc.toml /etc/frp/frpc.toml
+    command: -c /etc/frp/frpc.toml
+
+usage: |
+  先部署 frps，并记录它的地址、控制端口与鉴权令牌；部署本应用时填写相同的服务端地址和 token。
+  打开本应用后，LazyCat 会自动为 frpc Web UI 注入 Basic Authorization；安装向导会创建一个可运行的初始 TCP 代理，后续也可在 UI 中动态管理代理。
