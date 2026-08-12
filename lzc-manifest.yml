@@ -36,11 +36,6 @@ services:
     binds:
       - /lzcapp/var/frpc/config:/etc/frp
       - /lzcapp/var/frpc:/var/lib/frp
-    setup_script: |
-      if [ ! -f /etc/frp/frpc.toml ]; then
-        cp /lzcapp/pkg/content/frpc.toml /etc/frp/frpc.toml
-      fi
-    command: -c /etc/frp/frpc.toml
 
 usage: |
   先部署 frps，并记录它的地址、控制端口与鉴权令牌；部署本应用时填写相同的服务端地址和 token。

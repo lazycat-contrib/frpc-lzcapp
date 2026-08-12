@@ -12,7 +12,7 @@ This directory packages `frpc` `v0.70.1` as a LazyCat LPK v2 application for pac
 - Persistent dynamic proxy state: `/lzcapp/var/frpc` -> `/var/lib/frp`
 - Generated GitHub Release asset: `community.lazycat.app.frpc-v0.70.1.lpk`
 
-The packaged `content/frpc.toml` initializes `/etc/frp/frpc.toml` only when that file does not exist. Restarts and upgrades therefore preserve user changes. `frpc` renders the initial Go-template `{{ .Envs.* }}` placeholders from the injected `FRPC_*` environment variables. The setup wizard creates an initial TCP proxy, which can later be managed from the Web UI.
+A packaged entrypoint script initializes `/etc/frp/frpc.toml` only when that file does not exist, then executes `frpc -c /etc/frp/frpc.toml`. Restarts and upgrades therefore preserve user changes. `frpc` renders the initial Go-template `{{ .Envs.* }}` placeholders from the injected `FRPC_*` environment variables. The setup wizard creates an initial TCP proxy, which can later be managed from the Web UI.
 
 ## Deployment
 
