@@ -8,10 +8,11 @@ This directory packages `frpc` `v0.70.1` as a LazyCat LPK v2 application for pac
 - Manifest runtime image: `ghcr.1ms.run/fatedier/frpc:v0.70.1`
 - Network mode: host, so `127.0.0.1` proxy targets refer to the LazyCat host
 - Web UI: LazyCat application domain backed by `host.lzcapp:7400`
+- Persistent configuration: `/lzcapp/var/frpc/config` -> `/etc/frp`
 - Persistent dynamic proxy state: `/lzcapp/var/frpc` -> `/var/lib/frp`
 - Generated GitHub Release asset: `community.lazycat.app.frpc-v0.70.1.lpk`
 
-The packaged `content/frpc.toml` is copied to `/etc/frp/frpc.toml` at startup. `frpc` itself renders the Go-template `{{ .Envs.* }}` placeholders from the injected `FRPC_*` environment variables. The setup wizard creates an initial TCP proxy, which can later be managed from the Web UI.
+The packaged `content/frpc.toml` initializes `/etc/frp/frpc.toml` only when that file does not exist. Restarts and upgrades therefore preserve user changes. `frpc` renders the initial Go-template `{{ .Envs.* }}` placeholders from the injected `FRPC_*` environment variables. The setup wizard creates an initial TCP proxy, which can later be managed from the Web UI.
 
 ## Deployment
 

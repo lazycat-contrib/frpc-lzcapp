@@ -34,10 +34,12 @@ services:
       - "FRPC_LOCAL_PORT={{ .U.local_port }}"
       - "FRPC_REMOTE_PORT={{ .U.remote_port }}"
     binds:
+      - /lzcapp/var/frpc/config:/etc/frp
       - /lzcapp/var/frpc:/var/lib/frp
     setup_script: |
-      mkdir -p /etc/frp
-      cp /lzcapp/pkg/content/frpc.toml /etc/frp/frpc.toml
+      if [ ! -f /etc/frp/frpc.toml ]; then
+        cp /lzcapp/pkg/content/frpc.toml /etc/frp/frpc.toml
+      fi
     command: -c /etc/frp/frpc.toml
 
 usage: |
